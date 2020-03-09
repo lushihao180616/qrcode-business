@@ -624,11 +624,25 @@ public class LSHQRCodeUtil {
         } else {
             filePath = projectBasicInfo.getModelUrl() + "\\" + qrCode.getFileName() + ".jpg";
         }
+        boolean result;
         if (isMp4) {
             filePath = filePath.substring(0, filePath.lastIndexOf(".")) + ".gif";
-            new LSHGifUtil().jpgToGif(images, filePath, qrCode.getQrCodeTemple().getFrame());
+            result = new LSHGifUtil().jpgToGif(images, filePath, qrCode.getQrCodeTemple().getFrame());
         } else {
-            lshImageUtil.sendImage(filePath, images.get(0));
+            result = lshImageUtil.sendImage(filePath, images.get(0));
+        }
+        if (!result) {
+            int subCount = 0;
+            if (qrCode.getType().equals("text")) {//文本
+                subCount = 1;
+            } else if (qrCode.getType().equals("image")) {//图片
+                subCount = 10;
+            } else if (qrCode.getType().equals("video")) {//视频
+                subCount = 10;
+            } else if (qrCode.getType().equals("beautify")) {//二维码美化
+                subCount = 5;
+            }
+            userInfoService.countAdd(subCount, userBasicInfo.getCode());
         }
         return filePath;
     }
