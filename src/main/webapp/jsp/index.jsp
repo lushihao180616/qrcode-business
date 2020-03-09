@@ -58,14 +58,6 @@
 </p>
 
 <div class="linkItems">
-    <div class="lineItem1" onclick="navigate('models/business.jsp')" onMouseOver="makevisible(this,0)"
-         onMouseOut="makevisible(this,1)">
-        <div>商&emsp;家&emsp;管&emsp;理</div>
-    </div>
-    <div class="lineItem2" onclick="navigate('models/temple.jsp')" onMouseOver="makevisible(this,0)"
-         onMouseOut="makevisible(this,1)">
-        <div>模&emsp;板&emsp;管&emsp;理</div>
-    </div>
     <div class="lineItem3" onclick="navigate('models/qrcode.jsp')" onMouseOver="makevisible(this,0)"
          onMouseOut="makevisible(this,1)">
         <div>二&ensp;维&ensp;码&ensp;管&ensp;理</div>

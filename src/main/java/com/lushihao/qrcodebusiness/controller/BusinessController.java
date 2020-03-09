@@ -22,36 +22,6 @@ public class BusinessController {
     @Resource
     private LSHMACUtil lshmacUtil;
 
-    @RequestMapping("create")
-    @ResponseBody
-    public Result create(@RequestBody Map<String, Object> reqMap) {
-        if (!lshmacUtil.check()) {
-            return null;
-        }
-        String logoSrc = (String) reqMap.get("logoSrc");
-        return businessService.create(LSHMapUtils.mapToEntity(reqMap, Business.class), logoSrc);
-    }
-
-    @RequestMapping("update")
-    @ResponseBody
-    public Result update(@RequestBody Map<String, Object> reqMap) {
-        if (!lshmacUtil.check()) {
-            return null;
-        }
-        String logoSrc = (String) reqMap.get("logoSrc");
-        return businessService.update(LSHMapUtils.mapToEntity(reqMap, Business.class), logoSrc);
-    }
-
-    @RequestMapping("delete")
-    @ResponseBody
-    public Result delete(@RequestBody Map<String, Object> reqMap) {
-        if (!lshmacUtil.check()) {
-            return null;
-        }
-        String code = (String) reqMap.get("code");
-        return businessService.delete(code);
-    }
-
     @RequestMapping("filter")
     @ResponseBody
     public Result filter(@RequestBody Map<String, Object> reqMap) {
