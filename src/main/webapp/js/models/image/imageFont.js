@@ -21,7 +21,7 @@ function create() {
         color: color
     };
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', "http://localhost:8090/qrcode/image/addFont", false);
+    xhr.open('POST', "http://localhost:8070/qrcode/image/addFont", false);
     // 添加http头，发送信息至服务器时内容编码类型
     xhr.setRequestHeader('Content-type', 'application/json');
     xhr.setRequestHeader('dataType', 'json');
@@ -90,7 +90,7 @@ function test() {
         color: color
     };
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', "http://localhost:8090/qrcode/image/testFont", false);
+    xhr.open('POST', "http://localhost:8070/qrcode/image/testFont", false);
     // 添加http头，发送信息至服务器时内容编码类型
     xhr.setRequestHeader('Content-type', 'application/json');
     xhr.setRequestHeader('dataType', 'json');

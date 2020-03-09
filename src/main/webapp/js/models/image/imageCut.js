@@ -19,7 +19,7 @@ function create() {
         alpha: parseInt(alpha)
     };
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', "http://localhost:8090/qrcode/image/addCut", false);
+    xhr.open('POST', "http://localhost:8070/qrcode/image/addCut", false);
     // 添加http头，发送信息至服务器时内容编码类型
     xhr.setRequestHeader('Content-type', 'application/json');
     xhr.setRequestHeader('dataType', 'json');
@@ -85,7 +85,7 @@ function test() {
         alpha: parseInt(alpha)
     };
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', "http://localhost:8090/qrcode/image/testCut", false);
+    xhr.open('POST', "http://localhost:8070/qrcode/image/testCut", false);
     // 添加http头，发送信息至服务器时内容编码类型
     xhr.setRequestHeader('Content-type', 'application/json');
     xhr.setRequestHeader('dataType', 'json');

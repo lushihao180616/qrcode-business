@@ -3,7 +3,7 @@ function init() {
         templeCode: document.getElementById("filterTemple").value
     };
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', "http://localhost:8090/qrcode/qrcode/qrcodeInit", false);
+    xhr.open('POST', "http://localhost:8070/qrcode/qrcode/qrcodeInit", false);
     // 添加http头，发送信息至服务器时内容编码类型
     xhr.setRequestHeader('Content-type', 'application/json');
     xhr.setRequestHeader('dataType', 'json');
@@ -76,7 +76,7 @@ function getTemple() {
         code: document.getElementById("filterTemple").value
     };
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', "http://localhost:8090/qrcode/temple/filter", false);
+    xhr.open('POST', "http://localhost:8070/qrcode/temple/filter", false);
     // 添加http头，发送信息至服务器时内容编码类型
     xhr.setRequestHeader('Content-type', 'application/json');
     xhr.setRequestHeader('dataType', 'json');
@@ -184,7 +184,7 @@ function getRecord() {
         fileName: document.getElementById("filterFileName").value
     };
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', "http://localhost:8090/qrcode/qrcode/selectRecord", false);
+    xhr.open('POST', "http://localhost:8070/qrcode/qrcode/selectRecord", false);
     // 添加http头，发送信息至服务器时内容编码类型
     xhr.setRequestHeader('Content-type', 'application/json');
     xhr.setRequestHeader('dataType', 'json');
@@ -247,7 +247,7 @@ function create() {
         type: type
     };
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', "http://localhost:8090/qrcode/qrcode/create", false);
+    xhr.open('POST', "http://localhost:8070/qrcode/qrcode/create", false);
     // 添加http头，发送信息至服务器时内容编码类型
     xhr.setRequestHeader('Content-type', 'application/json');
     xhr.setRequestHeader('dataType', 'json');
@@ -303,7 +303,7 @@ function test() {
         type: type
     };
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', "http://localhost:8090/qrcode/qrcode/test", false);
+    xhr.open('POST', "http://localhost:8070/qrcode/qrcode/test", false);
     // 添加http头，发送信息至服务器时内容编码类型
     xhr.setRequestHeader('Content-type', 'application/json');
     xhr.setRequestHeader('dataType', 'json');

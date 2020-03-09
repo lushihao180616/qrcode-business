@@ -3,7 +3,7 @@ var tableRow = [];
 function init() {
     var filterBusinessCode = {};
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', "http://localhost:8090/qrcode/business/filter", false);
+    xhr.open('POST', "http://localhost:8070/qrcode/business/filter", false);
     // 添加http头，发送信息至服务器时内容编码类型
     xhr.setRequestHeader('Content-type', 'application/json');
     xhr.setRequestHeader('dataType', 'json');
@@ -42,7 +42,7 @@ function create() {
         fontColor: fontColor
     };
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', "http://localhost:8090/qrcode/image/addWaterMark", false);
+    xhr.open('POST', "http://localhost:8070/qrcode/image/addWaterMark", false);
     // 添加http头，发送信息至服务器时内容编码类型
     xhr.setRequestHeader('Content-type', 'application/json');
     xhr.setRequestHeader('dataType', 'json');
@@ -105,7 +105,7 @@ function test() {
         fontColor: fontColor
     };
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', "http://localhost:8090/qrcode/image/testWaterMark", false);
+    xhr.open('POST', "http://localhost:8070/qrcode/image/testWaterMark", false);
     // 添加http头，发送信息至服务器时内容编码类型
     xhr.setRequestHeader('Content-type', 'application/json');
     xhr.setRequestHeader('dataType', 'json');
