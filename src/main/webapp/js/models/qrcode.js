@@ -63,16 +63,11 @@ function handleTemples(templeList) {
 }
 
 function handleBusiness(businessList) {
-    var businesses = document.getElementById("businesses");
-    businesses.innerHTML = '';
-    for (var i = 0; i < businessList.length; i++) {
-        var option = document.createElement("option");
-        option.value = JSON.stringify(businessList[i]);
-        option.text = businessList[i].code;
-        businesses.add(option);
-    }
     if (businessList.length > 0) {
-        getBusinessCode("businesses");
+        document.getElementById("nowBusiness_name").innerText = '名        称：' + businessList[0].name;
+        document.getElementById("nowBusiness_address").innerText = '地        址：' + businessList[0].address;
+        document.getElementById("nowBusiness_phone").innerText = '电        话：' + businessList[0].phone;
+        document.getElementById("nowBusiness_businessName").innerText = '联  系  人：' + businessList[0].businessName;
     }
 }
 
@@ -103,45 +98,6 @@ function getTemple() {
         }
     }
     xhr.send(JSON.stringify(filterTempleCode));
-}
-
-function getBusiness() {
-    var filterBusinessCode = {
-        code: document.getElementById("filterBusiness").value
-    };
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', "http://localhost:8090/qrcode/business/filter", false);
-    // 添加http头，发送信息至服务器时内容编码类型
-    xhr.setRequestHeader('Content-type', 'application/json');
-    xhr.setRequestHeader('dataType', 'json');
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4) {
-            if (xhr.status == 200 || xhr.status == 304) {
-                if (xhr.responseText == null || xhr.responseText == '') {
-                    window.location.href = "../error.jsp"
-                    return
-                }
-                var result = JSON.parse(xhr.responseText);
-                if (result.ifSuccess) {
-                    var businesses = document.getElementById("businesses");
-                    businesses.innerHTML = '';
-                    for (var i = 0; i < result.bean.length; i++) {
-                        var option = document.createElement("option");
-                        option.value = JSON.stringify(result.bean[i]);
-                        option.text = result.bean[i].code;
-                        businesses.add(option);
-                    }
-                    if (result.bean.length > 0) {
-                        getBusinessCode("businesses");
-                    }
-                    alert(result.info);
-                } else {
-                    alert(result.errorInfo);
-                }
-            }
-        }
-    }
-    xhr.send(JSON.stringify(filterBusinessCode));
 }
 
 function changeType(id) {
@@ -221,14 +177,6 @@ function getTempleCode(id) {
     document.getElementById("nowTemple_path").innerText = '模板样例：' + temple.path;
 }
 
-function getBusinessCode(id) {
-    var budiness = JSON.parse(document.getElementById(id).value);
-    document.getElementById("nowBusiness_name").innerText = '名        称：' + budiness.name;
-    document.getElementById("nowBusiness_address").innerText = '地        址：' + budiness.address;
-    document.getElementById("nowBusiness_phone").innerText = '电        话：' + budiness.phone;
-    document.getElementById("nowBusiness_businessName").innerText = '联  系  人：' + budiness.businessName;
-}
-
 function getRecord() {
     var filterRecord = {
         templeCode: document.getElementById("filterRecordTemple").value,
@@ -276,7 +224,6 @@ function create() {
     var message = getMessage();
     var temple = document.getElementById("temples").value;
     var type = document.getElementById("createLayout").value;
-    var business = document.getElementById("businesses").value;
     var fileName = document.getElementById("fileName").value;
     var backGround = document.getElementById("backGround").value;
     var shortLength = document.getElementById("shortLength").value;
@@ -284,13 +231,12 @@ function create() {
     var y = document.getElementById("y").value;
     var alpha = document.getElementById("alpha").value;
     var angle = document.getElementById("angle").value;
-    if (!check(message, temple, business, fileName, backGround, shortLength, x, y, alpha, angle)) {
+    if (!check(message, temple, fileName, backGround, shortLength, x, y, alpha, angle)) {
         return
     }
     var createQRCode = {
         message: message,
         templeCode: JSON.parse(temple).code,
-        businessCode: JSON.parse(business).code,
         fileName: fileName,
         backGround: backGround,
         shortLength: parseInt(shortLength),
@@ -317,7 +263,6 @@ function create() {
                     handleRecord(result.bean.record);
                     document.getElementById("textMessage").value = '';
                     document.getElementById("temples").options[0].selected = true;
-                    document.getElementById("businesses").options[0].selected = true;
                     document.getElementById("fileName").value = '';
                     document.getElementById("backGround").value = '';
                     document.getElementById("createTest").value = '';
@@ -335,7 +280,6 @@ function test() {
     var message = getMessage();
     var temple = document.getElementById("temples").value;
     var type = document.getElementById("createLayout").value;
-    var business = document.getElementById("businesses").value;
     var fileName = document.getElementById("fileName").value;
     var backGround = document.getElementById("backGround").value;
     var shortLength = document.getElementById("shortLength").value;
@@ -343,13 +287,12 @@ function test() {
     var y = document.getElementById("y").value;
     var alpha = document.getElementById("alpha").value;
     var angle = document.getElementById("angle").value;
-    if (!check(message, temple, business, fileName, backGround, shortLength, x, y, alpha, angle)) {
+    if (!check(message, temple, fileName, backGround, shortLength, x, y, alpha, angle)) {
         return
     }
     var createQRCode = {
         message: message,
         templeCode: JSON.parse(temple).code,
-        businessCode: JSON.parse(business).code,
         fileName: fileName,
         backGround: backGround,
         shortLength: parseInt(shortLength),
@@ -385,7 +328,7 @@ function test() {
     xhr.send(JSON.stringify(createQRCode));
 }
 
-function check(message, temple, business, fileName, backGround, shortLength, x, y, alpha, angle) {
+function check(message, temple, fileName, backGround, shortLength, x, y, alpha, angle) {
     var checkStr = '';
     if (message == '' || message == null) {
         checkStr += '二维码信息必须填写 ';
@@ -410,9 +353,6 @@ function check(message, temple, business, fileName, backGround, shortLength, x, 
                 checkStr += '旋转角度必须填写（0-359） ';
             }
         }
-    }
-    if (business == null) {
-        checkStr += '商家必须选择 ';
     }
     if (fileName == '' || fileName == null) {
         checkStr += '文件名必须填写 ';

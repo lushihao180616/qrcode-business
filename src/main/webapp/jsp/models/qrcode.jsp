@@ -58,14 +58,8 @@
             type="button"
             value="搜索"
             onclick="getTemple()"/><br><br>
-        <span class="itemName">商&emsp;&emsp;家：</span><input class="topItemFilter" id="filterBusiness"/><input
-            class="topItemSearch" type="button"
-            value="搜索"
-            onclick="getBusiness()"/><br><br>
         <span class="itemName">模&emsp;&emsp;板：</span><select class="topItemSelect" id="temples"
                                                              onchange="getTempleCode(this.id)"></select><br><br>
-        <span class="itemName">商&emsp;&emsp;家：</span><select class="topItemSelect" id="businesses"
-                                                             onchange="getBusinessCode(this.id)"></select><br><br>
         <span class="itemName">文&ensp;件&ensp;名：</span><input class="topItemInput" type="text" id="fileName"/><br><br>
         <span class="itemName">码透明度：</span><input class="topItemInput" type="text" id="alpha"
                                                   value="0"/><span

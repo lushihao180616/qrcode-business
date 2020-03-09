@@ -5,6 +5,8 @@ import com.lushihao.qrcodebusiness.entity.business.Business;
 import com.lushihao.qrcodebusiness.entity.common.Result;
 import com.lushihao.qrcodebusiness.entity.qrcode.QRCodeRecord;
 import com.lushihao.qrcodebusiness.entity.qrcode.QRCodeRequest;
+import com.lushihao.qrcodebusiness.entity.user.UserInfo;
+import com.lushihao.qrcodebusiness.entity.yml.UserBasicInfo;
 import com.lushihao.qrcodebusiness.service.business.BusinessService;
 import com.lushihao.qrcodebusiness.service.qrcode.QRCodeService;
 import com.lushihao.qrcodebusiness.service.temple.QRTempleService;
@@ -30,6 +32,8 @@ public class QRCodeController {
     private BusinessService businessService;
     @Resource
     private LSHMACUtil lshmacUtil;
+    @Resource
+    private UserBasicInfo userBasicInfo;
 
     @RequestMapping("create")
     @ResponseBody
@@ -38,6 +42,7 @@ public class QRCodeController {
             return null;
         }
         QRCodeRequest qrCodeRequest = transform(reqMap);
+        qrCodeRequest.setBusinessCode(userBasicInfo.getCode());
         return qrCodeService.create(qrCodeRequest);
     }
 
@@ -48,6 +53,7 @@ public class QRCodeController {
             return null;
         }
         QRCodeRequest qrCodeRequest = transform(reqMap);
+        qrCodeRequest.setBusinessCode(userBasicInfo.getCode());
         qrCodeRequest.setManagerCode("00000000");
         return qrCodeService.test(qrCodeRequest);
     }

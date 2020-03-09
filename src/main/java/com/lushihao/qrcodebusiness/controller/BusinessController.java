@@ -3,6 +3,7 @@ package com.lushihao.qrcodebusiness.controller;
 import com.lushihao.myutils.collection.LSHMapUtils;
 import com.lushihao.qrcodebusiness.entity.business.Business;
 import com.lushihao.qrcodebusiness.entity.common.Result;
+import com.lushihao.qrcodebusiness.entity.yml.UserBasicInfo;
 import com.lushihao.qrcodebusiness.service.business.BusinessService;
 import com.lushihao.qrcodebusiness.util.LSHMACUtil;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,8 @@ public class BusinessController {
     private BusinessService businessService;
     @Resource
     private LSHMACUtil lshmacUtil;
+    @Resource
+    private UserBasicInfo userBasicInfo;
 
     @RequestMapping("filter")
     @ResponseBody
@@ -29,9 +32,7 @@ public class BusinessController {
             return null;
         }
         Business business = LSHMapUtils.mapToEntity(reqMap, Business.class);
-        if ("".equals(business.getCode())) {
-            business.setCode(null);
-        }
+        business.setCode(userBasicInfo.getCode());
         if ("".equals(business.getName())) {
             business.setName(null);
         }
