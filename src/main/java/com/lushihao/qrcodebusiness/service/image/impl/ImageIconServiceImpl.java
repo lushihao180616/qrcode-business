@@ -2,7 +2,9 @@ package com.lushihao.qrcodebusiness.service.image.impl;
 
 import com.lushihao.qrcodebusiness.entity.common.Result;
 import com.lushihao.qrcodebusiness.entity.image.ImageIcon;
+import com.lushihao.qrcodebusiness.entity.yml.UserBasicInfo;
 import com.lushihao.qrcodebusiness.service.image.ImageIconService;
+import com.lushihao.qrcodebusiness.service.userinfo.UserInfoService;
 import com.lushihao.qrcodebusiness.util.LSHImageUtil;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,10 @@ public class ImageIconServiceImpl implements ImageIconService {
 
     @Resource
     private LSHImageUtil lshImageUtil;
+    @Resource
+    private UserInfoService userInfoService;
+    @Resource
+    private UserBasicInfo userBasicInfo;
 
     @Override
     public Result addIcon(ImageIcon imageIcon) {
@@ -40,6 +46,10 @@ public class ImageIconServiceImpl implements ImageIconService {
         File testFile = new File(imageIcon.getPath().substring(0, imageIcon.getPath().lastIndexOf(".")) + "_test.jpg");
         if (testFile.exists()) {
             testFile.delete();
+        }
+        int subCount = 1;
+        if (!userInfoService.countSub(subCount, userBasicInfo.getCode())) {
+            return new Result(false, null, null, "金豆不够用了");
         }
         //加水印图片
         String newImagePath = imageIcon.getPath().substring(0, imageIcon.getPath().lastIndexOf(".")) + "_icon.jpg";

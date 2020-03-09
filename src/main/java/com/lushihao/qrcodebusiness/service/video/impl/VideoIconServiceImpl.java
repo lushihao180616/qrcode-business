@@ -3,6 +3,8 @@ package com.lushihao.qrcodebusiness.service.video.impl;
 import com.lushihao.qrcodebusiness.entity.common.Result;
 import com.lushihao.qrcodebusiness.entity.video.VideoIcon;
 import com.lushihao.qrcodebusiness.entity.video.VideoInfo;
+import com.lushihao.qrcodebusiness.entity.yml.UserBasicInfo;
+import com.lushihao.qrcodebusiness.service.userinfo.UserInfoService;
 import com.lushihao.qrcodebusiness.service.video.VideoIconService;
 import com.lushihao.qrcodebusiness.util.LSHFfmpegUtil;
 import com.lushihao.qrcodebusiness.util.LSHImageUtil;
@@ -20,6 +22,10 @@ public class VideoIconServiceImpl implements VideoIconService {
     private LSHImageUtil lshImageUtil;
     @Resource
     private LSHFfmpegUtil lshFfmpegUtil;
+    @Resource
+    private UserInfoService userInfoService;
+    @Resource
+    private UserBasicInfo userBasicInfo;
 
     @Override
     public Result addIcon(VideoIcon videoIcon) {
@@ -54,6 +60,10 @@ public class VideoIconServiceImpl implements VideoIconService {
         File testFile = new File(videoIcon.getPath().substring(0, videoIcon.getPath().lastIndexOf(".")) + "_test.mp4");
         if (testFile.exists()) {
             testFile.delete();
+        }
+        int subCount = 1;
+        if (!userInfoService.countSub(subCount, userBasicInfo.getCode())) {
+            return new Result(false, null, null, "金豆不够用了");
         }
         //加水印图片
         String newImagePath = videoIcon.getPath().substring(0, videoIcon.getPath().lastIndexOf(".")) + "_icon.jpg";

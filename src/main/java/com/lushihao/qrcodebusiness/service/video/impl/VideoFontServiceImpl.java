@@ -3,6 +3,8 @@ package com.lushihao.qrcodebusiness.service.video.impl;
 import com.lushihao.qrcodebusiness.entity.common.Result;
 import com.lushihao.qrcodebusiness.entity.video.VideoFont;
 import com.lushihao.qrcodebusiness.entity.video.VideoInfo;
+import com.lushihao.qrcodebusiness.entity.yml.UserBasicInfo;
+import com.lushihao.qrcodebusiness.service.userinfo.UserInfoService;
 import com.lushihao.qrcodebusiness.service.video.VideoFontService;
 import com.lushihao.qrcodebusiness.util.LSHCharUtil;
 import com.lushihao.qrcodebusiness.util.LSHFfmpegUtil;
@@ -27,6 +29,10 @@ public class VideoFontServiceImpl implements VideoFontService {
     private LSHCharUtil lshCharUtil;
     @Resource
     private LSHFfmpegUtil lshFfmpegUtil;
+    @Resource
+    private UserInfoService userInfoService;
+    @Resource
+    private UserBasicInfo userBasicInfo;
 
     @Override
     public Result addFont(VideoFont videoFont) {
@@ -65,6 +71,10 @@ public class VideoFontServiceImpl implements VideoFontService {
         File testFile = new File(videoFont.getPath().substring(0, videoFont.getPath().lastIndexOf(".")) + "_test.mp4");
         if (testFile.exists()) {
             testFile.delete();
+        }
+        int subCount = 1;
+        if (!userInfoService.countSub(subCount, userBasicInfo.getCode())) {
+            return new Result(false, null, null, "金豆不够用了");
         }
         //加水印图片
         String newImagePath = videoFont.getPath().substring(0, videoFont.getPath().lastIndexOf(".")) + "_font.jpg";
