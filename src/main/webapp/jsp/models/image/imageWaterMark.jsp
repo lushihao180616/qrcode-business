@@ -23,11 +23,6 @@
     <div class="topItem1">
         <br>
         <span class="topItemTitle">添加水印：</span></span><br><br><br>
-        <span class="itemName">商家搜索：</span><input class="topItemFilter" id="createCode"/><input class="topItemSearch"
-                                                                                                type="button"
-                                                                                                value="搜索"
-                                                                                                onclick="init()"/><br><br>
-        <span class="itemName">商家选择：</span><select class="topItemSelect" id="createBusinesses"></select><br><br>
         <span class="itemName">原&ensp;图&ensp;片：</span><input class="topItemSelect" type="file" id="createPath"
                                                              accept="image/jpeg, image/jpg, image/png"/><br><br>
         <span class="itemName">水印高度：</span><input class="topItemInput" type="text"

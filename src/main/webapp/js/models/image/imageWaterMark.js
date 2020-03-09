@@ -1,9 +1,7 @@
 var tableRow = [];
 
 function init() {
-    var filterBusinessCode = {
-        code: document.getElementById("createCode").value
-    };
+    var filterBusinessCode = {};
     var xhr = new XMLHttpRequest();
     xhr.open('POST', "http://localhost:8090/qrcode/business/filter", false);
     // 添加http头，发送信息至服务器时内容编码类型
@@ -18,14 +16,6 @@ function init() {
                 }
                 var result = JSON.parse(xhr.responseText);
                 if (result.ifSuccess) {
-                    var businesses = document.getElementById("createBusinesses");
-                    businesses.innerHTML = '';
-                    for (var i = 0; i < result.bean.length; i++) {
-                        var option = document.createElement("option");
-                        option.value = JSON.stringify(result.bean[i]);
-                        option.text = result.bean[i].code;
-                        businesses.add(option);
-                    }
                 } else {
                     alert(result.errorInfo);
                 }
@@ -36,17 +26,15 @@ function init() {
 }
 
 function create() {
-    var business = document.getElementById("createBusinesses").value;
     var path = document.getElementById("createPath").value;
     var height = document.getElementById("createHeight").value;
     var x = document.getElementById("createX").value;
     var y = document.getElementById("createY").value;
     var fontColor = document.getElementById("createFontColor").options[document.getElementById("createFontColor").selectedIndex].value;
-    if (!check(business, path, height, x, y)) {
+    if (!check(path, height, x, y)) {
         return
     }
     var createWaterMark = {
-        businessCode: JSON.parse(business).code,
         path: path,
         height: parseInt(height),
         x: parseInt(x),
@@ -101,17 +89,15 @@ function create() {
 }
 
 function test() {
-    var business = document.getElementById("createBusinesses").value;
     var path = document.getElementById("createPath").value;
     var height = document.getElementById("createHeight").value;
     var x = document.getElementById("createX").value;
     var y = document.getElementById("createY").value;
     var fontColor = document.getElementById("createFontColor").options[document.getElementById("createFontColor").selectedIndex].value;
-    if (!check(business, path, height, x, y)) {
+    if (!check(path, height, x, y)) {
         return
     }
     var createWaterMark = {
-        businessCode: JSON.parse(business).code,
         path: path,
         height: parseInt(height),
         x: parseInt(x),
@@ -144,11 +130,8 @@ function test() {
     xhr.send(JSON.stringify(createWaterMark));
 }
 
-function check(business, path, height, x, y) {
+function check(path, height, x, y) {
     var checkStr = '';
-    if (business == null) {
-        checkStr += '商家必须选择 ';
-    }
     if (path == null || path == '') {
         checkStr += '原图片必须选择 ';
     }

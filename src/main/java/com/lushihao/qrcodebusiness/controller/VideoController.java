@@ -5,6 +5,7 @@ import com.lushihao.qrcodebusiness.entity.video.VideoCut;
 import com.lushihao.qrcodebusiness.entity.video.VideoFont;
 import com.lushihao.qrcodebusiness.entity.video.VideoIcon;
 import com.lushihao.qrcodebusiness.entity.video.VideoWaterMark;
+import com.lushihao.qrcodebusiness.entity.yml.UserBasicInfo;
 import com.lushihao.qrcodebusiness.service.video.VideoCutService;
 import com.lushihao.qrcodebusiness.service.video.VideoFontService;
 import com.lushihao.qrcodebusiness.service.video.VideoIconService;
@@ -32,6 +33,8 @@ public class VideoController {
     private VideoWaterMarkService videoWaterMarkService;
     @Resource
     private LSHMACUtil lshmacUtil;
+    @Resource
+    private UserBasicInfo userBasicInfo;
 
     @RequestMapping("addCut")
     @ResponseBody
@@ -121,7 +124,7 @@ public class VideoController {
             return null;
         }
         VideoWaterMark videoWaterMark = transformWaterMark(reqMap);
-        videoWaterMark.setBusinessCode((String) reqMap.get("businessCode"));
+        videoWaterMark.setBusinessCode(userBasicInfo.getCode());
         return videoWaterMarkService.addWaterMark(videoWaterMark);
     }
 

@@ -5,6 +5,7 @@ import com.lushihao.qrcodebusiness.entity.image.ImageCut;
 import com.lushihao.qrcodebusiness.entity.image.ImageFont;
 import com.lushihao.qrcodebusiness.entity.image.ImageIcon;
 import com.lushihao.qrcodebusiness.entity.image.ImageWaterMark;
+import com.lushihao.qrcodebusiness.entity.yml.UserBasicInfo;
 import com.lushihao.qrcodebusiness.service.image.ImageCutService;
 import com.lushihao.qrcodebusiness.service.image.ImageFontService;
 import com.lushihao.qrcodebusiness.service.image.ImageIconService;
@@ -32,6 +33,8 @@ public class ImageController {
     private ImageWaterMarkService imageWaterMarkService;
     @Resource
     private LSHMACUtil lshmacUtil;
+    @Resource
+    private UserBasicInfo userBasicInfo;
 
     @RequestMapping("addCut")
     @ResponseBody
@@ -134,7 +137,7 @@ public class ImageController {
             return null;
         }
         ImageWaterMark wm = transformWaterMark(reqMap);
-        wm.setBusinessCode((String) reqMap.get("businessCode"));
+        wm.setBusinessCode(userBasicInfo.getCode());
         return imageWaterMarkService.addWaterMark(wm);
     }
 
