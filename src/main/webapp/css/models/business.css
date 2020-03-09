@@ -1,0 +1,72 @@
+.toIndex {
+    background-color: cadetblue;
+}
+
+.topTitle {
+    background-color: cadetblue;
+}
+
+.middleTitle {
+    background-color: cadetblue;
+}
+
+.topItemTitle {
+    background-color: cadetblue;
+}
+
+.top {
+    height: 450px;
+}
+
+.topItem1, .topItem2, .topItem3 {
+    height: 450px;
+}
+
+.bottomTh1, .bottomTh2, .bottomTh3, .bottomTh4, .bottomTh5 {
+    width: 12%;
+    background-color: red;
+    color: white;
+    padding: 5px;
+}
+
+.bottomTh2 {
+    width: 22%;
+    background-color: black;
+}
+
+.bottomTh3 {
+    width: 42%;
+    background-color: blue;
+}
+
+.bottomTh4 {
+    background-color: purple;
+}
+
+.bottomTh5 {
+    background-color: green;
+}
+
+.bottomTd1, .bottomTd2, .bottomTd3, .bottomTd4, .bottomTd5 {
+    width: 12%;
+    border: 2px solid red;
+    padding: 5px;
+}
+
+.bottomTd2 {
+    width: 22%;
+    border: 2px solid black;
+}
+
+.bottomTd3 {
+    width: 42%;
+    border: 2px solid blue;
+}
+
+.bottomTd4 {
+    border: 2px solid purple;
+}
+
+.bottomTd5 {
+    border: 2px solid green;
+}

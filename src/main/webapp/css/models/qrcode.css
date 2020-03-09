@@ -1,0 +1,80 @@
+.toIndex {
+    background-color: lightcoral;
+}
+
+.topTitle {
+    background-color: lightcoral;
+}
+
+.middleTitle {
+    background-color: lightcoral;
+}
+
+.topItemTitle {
+    background-color: lightcoral;
+}
+
+.top {
+    height: 750px;
+}
+
+.topItem1, .topItem2, .topItem3 {
+    height: 750px;
+}
+
+.bottomTh1, .bottomTh2, .bottomTh3, .bottomTh4, .bottomTh5, .bottomTh6 {
+    width: 12%;
+    background-color: red;
+    color: white;
+    padding: 5px;
+}
+
+.bottomTh2 {
+    background-color: black;
+}
+
+.bottomTh3 {
+    width: 16%;
+    background-color: blue;
+}
+
+.bottomTh4 {
+    width: 36%;
+    background-color: purple;
+}
+
+.bottomTh5 {
+    background-color: green;
+}
+
+.bottomTh6 {
+    background-color: coral;
+}
+
+.bottomTd1, .bottomTd2, .bottomTd3, .bottomTd4, .bottomTd5, .bottomTd6 {
+    width: 12%;
+    border: 2px solid red;
+    padding: 5px;
+}
+
+.bottomTd2 {
+    border: 2px solid black;
+}
+
+.bottomTd3 {
+    width: 16%;
+    border: 2px solid blue;
+}
+
+.bottomTd4 {
+    width: 36%;
+    border: 2px solid purple;
+}
+
+.bottomTd5 {
+    border: 2px solid green;
+}
+
+.bottomTd6 {
+    border: 2px solid coral;
+}
