@@ -9,6 +9,7 @@ import com.lushihao.qrcodebusiness.entity.common.Result;
 import com.lushihao.qrcodebusiness.entity.qrcode.QRCode;
 import com.lushihao.qrcodebusiness.entity.qrcode.QRCodeRecord;
 import com.lushihao.qrcodebusiness.entity.yml.ProjectBasicInfo;
+import com.lushihao.qrcodebusiness.service.userinfo.UserInfoService;
 import com.swetake.util.Qrcode;
 import org.springframework.stereotype.Component;
 
@@ -38,6 +39,8 @@ public class LSHQRCodeUtil {
     private LSHImageUtil lshImageUtil;
     @Resource
     private LSHCharUtil lshCharUtil;
+    @Resource
+    private UserInfoService userInfoService;
 
     /**
      * 二维码宽度
@@ -128,6 +131,23 @@ public class LSHQRCodeUtil {
             }
             //添加背景
             Map<Integer, BufferedImage> imageAndBg = addBG(image, qrCode);
+            int subCount = 0;
+            if (!ifTest) {
+                if (qrCode.getType().equals("text")) {//文本
+                    subCount = 1;
+                } else if (qrCode.getType().equals("image")) {//图片
+                    subCount = 10;
+                } else if (qrCode.getType().equals("video")) {//视频
+                    subCount = 10;
+                } else if (qrCode.getType().equals("beautify")) {//二维码美化
+                    subCount = 5;
+                }
+            } else {
+                subCount = 0;
+            }
+            if (!userInfoService.countSub(subCount, qrCode.getBusinessCode())) {
+                return new Result(false, null, null, "金豆不够用了");
+            }
             //输出图片
             String filePath = outPutImage(imageAndBg, qrCode, ifTest, ifModel);
             map.put("filePath", filePath);
